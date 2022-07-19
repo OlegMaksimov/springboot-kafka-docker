@@ -1,23 +1,29 @@
 package com.example.kafka.springbootkafkadocker;
 
+import com.mailshine.springboot.kafka.avro.model.Student;
+import java.util.Random;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
 
-    private final com.example.kafka.springbootkafka.Producer producer;
-
     @Autowired
-    public TestController(com.example.kafka.springbootkafka.Producer producer) {
-        this.producer = producer;
-    }
-    @PostMapping("/publish")
-    public void messageToTopic(@RequestParam("message") String message){
+    private ProducerService producerService;
 
-        this.producer.sendMessage(message);
+
+    @GetMapping("/publish")
+    public void messageToTopic(){
+        Random generateValue = new Random();
+        Student messageRequest = Student.newBuilder()
+            .setAge(generateValue.nextInt(10))
+            .setStudentId(UUID.randomUUID().toString())
+            .setStudentName("trololo")
+            .build();
+
+        producerService.sendMessage(messageRequest);
 
 
     }
