@@ -71,7 +71,7 @@
 							<sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
 							<outputDirectory>${project.build.directory}/generated-sources/avro</outputDirectory>
 							<imports>
-								<import>${project.basedir}/src/main/avro/input_message_request.avsc</import>
+								<import>${project.basedir}/src/main/avro/input_kyc_message_response.avsc</import>
 							</imports>
 						</configuration>
 					</execution>

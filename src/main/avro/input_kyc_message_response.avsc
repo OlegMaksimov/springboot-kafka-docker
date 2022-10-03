@@ -1,0 +1,39 @@
+{
+  "type": "record",
+  "name": "InputKycMessageResponse",
+  "namespace": "ru.bankffin.dss.proxy.schema.kyc.input",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "key",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "complexId",
+      "type": "long",
+      "default": 0
+    },
+    {
+      "name": "returnIntermediateResults",
+      "type": [
+        "string",
+        "null"
+      ],
+      "default": null
+    },
+    {
+      "name": "parameters",
+      "type" : {
+        "type": "map",
+        "values": ["long", "string", "null"],
+        "default": null
+      }
+    }
+  ]
+}
+

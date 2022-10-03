@@ -1,0 +1,93 @@
+{
+  "type": "record",
+  "name": "OutputKycMessageRequest",
+  "namespace": "ru.bankffin.dss.proxy.schema.kyc.output",
+  "fields": [
+    {
+      "name": "guid",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "complexName",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "errorMessage",
+      "type": [
+        "string",
+        "null"
+      ],
+      "default": null
+    },
+    {
+      "name": "conclusion",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "conclusions",
+      "type": {
+        "type": "array",
+        "items": {
+          "name": "Conclusions",
+          "type": "record",
+          "fields": [
+            {
+              "name": "data",
+              "type": "string",
+              "default": ""
+            },
+            {
+              "name": "individualCheckName",
+              "type": "string",
+              "default": ""
+            },
+            {
+              "name": "individualCheckConclusions",
+              "type": {
+                "type": "array",
+                "items": {
+                  "name": "IndividualCheckConclusions",
+                  "type": "record",
+                  "fields": [
+                    {
+                      "name": "name",
+                      "type": "string",
+                      "default": ""
+                    },
+                    {
+                      "name": "conclusion",
+                      "type": "string",
+                      "default": ""
+                    },
+                    {
+                      "name": "ruDescription",
+                      "type": "string",
+                      "default": ""
+                    }
+                  ]
+                }
+              },
+              "default": []
+            }
+          ]
+        }
+      },
+      "default": []
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "parameters",
+      "type" : {
+        "type": "map",
+        "values": ["long", "string"]
+      }
+    }
+  ]
+}

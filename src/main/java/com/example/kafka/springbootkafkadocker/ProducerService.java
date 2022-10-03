@@ -1,6 +1,5 @@
 package com.example.kafka.springbootkafkadocker;
 
-import com.mailshine.springboot.kafka.avro.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -8,6 +7,7 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
+import ru.bankffin.dss.proxy.schema.kyc.input.InputKycMessageResponse;
 
 @Service
 public class ProducerService {
@@ -15,16 +15,16 @@ public class ProducerService {
   private String topicName;
 
   @Autowired
-  private KafkaTemplate<String, Student> kafkaTemplate;
+  private KafkaTemplate<String, InputKycMessageResponse> kafkaTemplate;
 
-  public void sendMessage(Student message) {
-    ListenableFuture<SendResult<String, Student>> future = kafkaTemplate.send(topicName, message);
+  public void sendMessage(InputKycMessageResponse message) {
+    ListenableFuture<SendResult<String, InputKycMessageResponse>> future = kafkaTemplate.send(topicName, message);
 
     future.addCallback(
-        new ListenableFutureCallback<SendResult<String, Student>>() {
+        new ListenableFutureCallback<SendResult<String, InputKycMessageResponse>>() {
 
           @Override
-          public void onSuccess(SendResult<String, Student> result) {
+          public void onSuccess(SendResult<String, InputKycMessageResponse> result) {
 //            log.info(
 //                "Sent message=[{}] with offset=[{}]", message, result.getRecordMetadata().offset());
             System.out.println("success!");
