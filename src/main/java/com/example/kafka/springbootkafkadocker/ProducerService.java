@@ -7,7 +7,6 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
-import ru.bankffin.dss.proxy.schema.kyc.input.InputKycMessageResponse;
 
 @Service
 public class ProducerService {
@@ -15,16 +14,16 @@ public class ProducerService {
   private String topicName;
 
   @Autowired
-  private KafkaTemplate<String, InputKycMessageResponse> kafkaTemplate;
+  private KafkaTemplate<String, String> kafkaTemplate;
 
-  public void sendMessage(InputKycMessageResponse message) {
-    ListenableFuture<SendResult<String, InputKycMessageResponse>> future = kafkaTemplate.send(topicName, message);
+  public void sendMessage(String message) {
+    ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topicName, message);
 
     future.addCallback(
-        new ListenableFutureCallback<SendResult<String, InputKycMessageResponse>>() {
+        new ListenableFutureCallback<SendResult<String, String>>() {
 
           @Override
-          public void onSuccess(SendResult<String, InputKycMessageResponse> result) {
+          public void onSuccess(SendResult<String, String> result) {
 //            log.info(
 //                "Sent message=[{}] with offset=[{}]", message, result.getRecordMetadata().offset());
             System.out.println("success!");
